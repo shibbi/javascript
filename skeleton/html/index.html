@@ -11,8 +11,16 @@
     <script src="../../ttt-core-solution/ttt-core.js"></script>
     <script src="../js/ttt-view.js"></script>
 
+    <h1>Tic Tac Toe</h1>
+    <figure class='tic-tac-toe'>
+    </figure>
+
     <script>
       // Write your code here.
+      (function() {
+        game = new TTT.Game();
+        board = new TTT.View(game, $(".tic-tac-toe"));
+      })();
     </script>
   </body>
 </html>
