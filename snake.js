@@ -1,4 +1,8 @@
-var Coord = function(x, y) {
+if (typeof window.SnakeGame === "undefined") {
+  window.SnakeGame = {};
+}
+
+var Coord = window.SnakeGame.Coord = function(x, y) {
   this.x = x;
   this.y = y;
 }
@@ -18,7 +22,7 @@ Coord.prototype.isOpposite = function(coord) {
 
 var DIRS = ["N", "E", "S", "W"];
 
-var Snake = function () {
+var Snake = window.SnakeGame.Snake = function () {
   this.dir = DIRS[Math.floor(Math.random()*4)];
   this.segments = [new Coord(4, 5), new Coord(4, 6), new Coord(4,7)];
 }
@@ -41,7 +45,6 @@ Snake.prototype.move = function() {
     default:
       console.log('bad direction');
   }
-
   for (var i = 0; i < this.segments.length; i++) {
     this.segments[i].plus(movement);
   }
@@ -51,16 +54,13 @@ Snake.prototype.turn = function(dir) {
   this.dir = dir;
 };
 
-module.exports = Snake;
-
-
 var BOARDSIZE = 10;
 
-var Board = function() {
+var Board = window.SnakeGame.Board = function() {
   this.snake = new Snake();
   this.apples = [];
   this.setupBoard();
-}
+};
 
 Board.prototype.setupBoard = function() {
   this.grid = [];
@@ -81,9 +81,11 @@ Board.prototype.setupBoard = function() {
 };
 
 Board.prototype.render = function() {
+  var string = "";
   for (var i = 0; i < this.grid.length; i++) {
-    console.log(this.grid[i]);
+    string = string + (this.grid[i]).join(' ') + "\n";
   }
+  return string;
 };
 
-module.exports = { Coord: Coord, Board: Board, Snake: Snake };
+// module.exports = { Coord: Coord, Board: Board, Snake: Snake };

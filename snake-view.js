@@ -1,67 +1,43 @@
-(function () {
-  if (typeof Snake === "undefined") {
-    window.Snake = {};
-  }
+if (typeof window.SnakeGame === "undefined") {
+  window.SnakeGame = {};
+}
 
-  var View = Snake.View = function (game, $el) {
-    this.game = game;
-    this.$el = $el;
-    this.setupTowers();
-    this.bindEvents();
-    this.$firstStack = undefined;
-  };
+var View = window.SnakeGame.View = function($el) {
+  debugger
+  this.board = new window.SnakeGame.Board();
+  this.$el = $el;
+  this.bindListener();
+  setInterval(this.step.bind(this), 500);
+};
 
-  View.prototype.bindEvents = function () {
-    var self = this;
-    $(".stack").on("click", function (event) {
-      self.clickTower($(event.currentTarget));
-    });
-  };
-
-  View.prototype.clickTower = function ($stack) {
-    if (this.$firstStack === undefined) {
-      this.$firstStack = $stack;
-      $stack.toggleClass("selected");
-    } else {
-      var $secondStack = $stack;
-      this.$firstStack.toggleClass("selected");
-      var fromStack = this.$firstStack.data('id');
-      var toStack = $secondStack.data('id');
-      if (this.game.isValidMove(fromStack, toStack)) {
-        this.game.move(fromStack, toStack);
-      } else {
-        alert('invalid move yo');
-      }
-      this.$firstStack = undefined;
-      this.render();
+View.prototype.bindListener = function() {
+  $(".stack").keydown(function (event) {
+    var code = event.keyCode;
+    switch(code) {
+      case 38:
+        this.board.snake.turn('N');
+        break;
+      case 39:
+        this.board.snake.turn('E');
+        break;
+      case 40:
+        this.board.snake.turn('S');
+        break;
+      case 37:
+        this.board.snake.turn('W');
+        break;
+      default:
+        console.log("ha bad key teehee");
     }
-    if (this.game.isWon()) {
-      var $message = $("<h2>You've won!</h2>");
-      this.$el.after($message);
-      this.$el.off();
-    }
-  };
+  });
+};
 
-  View.prototype.setupTowers = function () {
-    for (var i = 0; i < this.game.towers.length; i++) {
-      var $stack = $("<div></div>");
-      $stack.addClass("stack group");
-      $stack.data("id", i);
-      this.$el.append($stack);
-    }
-    this.render();
-  };
+View.prototype.step = function() {
+  this.board.snake.move();
+  // this.board.grid
+  this.render();
+};
 
-  View.prototype.render = function() {
-    $(".stack").empty();
-    for (var i = 0; i < this.game.towers.length; i++) {
-      var stack = this.game.towers[i];
-      var $stack = $(".stack").filter(function() { return $.data(this, "id") === i; });
-      for (var j = stack.length - 1; j >= 0; j--) {
-        var $disc = $("<div></div>");
-        $disc.addClass("disc disc-" + stack[j]);
-        $stack.append($disc);
-      }
-    }
-  };
-})();
+View.prototype.render = function() {
+  this.$el.html("<pre>" + this.board.render() + "</pre>");
+};
