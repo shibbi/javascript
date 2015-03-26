@@ -14,14 +14,23 @@ var slide = function(dir) {
     if (this.activeIdx < 0) {
       this.activeIdx += this.$el.find("div.items").children().length;
     }
+    var $nextItem = $(this.$el.find("div.items img").eq(this.activeIdx));
+    $nextItem.addClass("active left");
+    setTimeout(function() {
+      $nextItem.removeClass("left");
+    }.bind(this), 0);
   } else {
     this.activeIdx += 1;
     if (this.activeIdx >= this.$el.find("div.items").children().length) {
       this.activeIdx -= this.$el.find("div.items").children().length;
     }
+    var $nextItem = $(this.$el.find("div.items img").eq(this.activeIdx));
+    $nextItem.addClass("active right");
+    setTimeout(function() {
+      $nextItem.removeClass("right");
+    }.bind(this), 0);
   }
-  var $nextItem = $(this.$el.find("div.items img").eq(this.activeIdx));
-  $nextItem.addClass("active");
+
 };
 
 $.fn.carousel = function () {
