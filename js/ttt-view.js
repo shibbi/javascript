@@ -30,8 +30,11 @@
       alert('Invalid Move!');
     }
     if (this.game.isOver()) {
-      var $message = $("<h2>You've won, " + this.game.winner() + "!</h2>");
-      $("." + this.game.winner()).addClass("winning");
+      var $message = $("<h2>It's a draw!</h2>");
+      if (this.game.winner() !== null) {
+        $message = $("<h2>You've won, " + this.game.winner() + "!</h2>");
+        $("." + this.game.winner()).addClass("winning");
+      }
       this.$el.after($message);
       this.$el.off();
     }

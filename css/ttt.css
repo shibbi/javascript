@@ -3,6 +3,7 @@ body {
   font-family: Helvetica, sans-serif;
   font-weight: 400;
   font-size: 24px;
+  color: #aaa;
 }
 
 .h1 {
@@ -11,11 +12,8 @@ body {
 
 .tic-tac-toe {
   margin: 0 auto;
-  width: 360px;
-  border: 10px solid #000;
-}
-
-.row {
+  width: 330px;
+  border: 5px solid #aaa;
 }
 
 .group:after {
@@ -28,29 +26,24 @@ body {
   float: left;
   height: 100px;
   width: 100px;
-  border: 10px solid #000;
-  background-color: #ccc;
+  border: 5px solid #aaa;
+  background-color: mistyrose;
 }
 
 .cell:hover {
-  background-color: yellow;
+  background-color: lightyellow;
   cursor: pointer;
 }
 
 .x, .o {
-  background-color: #fff;
+  background-color: #eee;
   font-size: 60px;
+  font-weight: 700;
   line-height: 100px;
 }
 
-.x {
-  color: blue;
-}
+.x { color: lightblue; }
 
-.o {
-  color: purple;
-}
+.o { color: pink; }
 
-.winning {
-  background-color: teal;
-}
+.winning { background-color: lavender; }
