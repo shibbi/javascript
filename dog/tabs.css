@@ -2,10 +2,18 @@
   font-weight: bold;
 }
 
-div .tab-pane {
+.tab-pane {
   display: none;
 }
 
-div .tab-pane.active {
+.tab-pane.active {
+  opacity: 1;
   display: block;
+  transition: opacity 0.5s;
+}
+
+.tab-pane.transitioning {
+  display: block;
+  opacity: 0;
+  transition: opacity 0.5s;
 }

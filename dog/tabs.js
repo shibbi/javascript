@@ -8,21 +8,24 @@ $.Tabs = function (el) {
 
 $.Tabs.clickTab = function(event) {
   event.preventDefault();
-  // var $link = this.$el.find("a[href='#" + this.$activeTab.attr('id') + "']");
-  // console.log("Removing active on " + this.$activeTab);
   var $oldlink = this.$el.find("a[href='#" + this.$activeTab.attr('id') + "']");
   var $newlink = $(event.currentTarget);
   if ($newlink !== $oldlink) {
+    var $oldTab = this.$activeTab;
     this.$activeTab.removeClass("active");
+    this.$activeTab.addClass("transitioning");
+    this.$activeTab.one('transitionend', function () {
+      $oldTab.removeClass("transitioning");
+      this.$activeTab = this.$contentTabs.find($newlink.attr("href"));
+      this.$activeTab.addClass("active").addClass("transitioning");
+      setTimeout(function() {
+        this.$activeTab.removeClass("transitioning");
+      }.bind(this), 0);
+    }.bind(this));
+
     $oldlink.removeClass("active");
     $newlink.addClass("active");
-    this.$activeTab = this.$contentTabs.find($newlink.attr("href"));
-    this.$activeTab.addClass("active");
   }
-  // var $id = $(event.currentTarget).attr('href');
-  // this.$activeTab = this.$contentTabs.find($id).addClass("active");
-  // var $newlink = this.$el.find("a[href='#" + this.$activeTab.attr('id') + "']");
-  // $newlink.addClass("active");
 };
 
 $.fn.tabs = function () {
