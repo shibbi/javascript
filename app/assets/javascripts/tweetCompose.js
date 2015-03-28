@@ -1,12 +1,24 @@
 $.TweetCompose = function (el) {
   this.$el = $(el);
+
+  var self = this;
   this.$el.on("submit", function () {
-    this.submitHandler(event);
-  }.bind(this));
+    self.submitHandler(event);
+  });
+
   this.$el.find("textarea").on("input", function() {
     var textLength = $(event.currentTarget).val().length;
-    this.$el.find(".chars-left").html(140 - textLength);
-  }.bind(this));
+    self.$el.find(".chars-left").html(140 - textLength);
+  });
+
+  this.$el.find(".add-mentioned-user").on("click", function() {
+    self.addMentionedUser(event);
+  });
+
+  this.$el.find(".mentioned-users").on("click", "a.remove-mentioned-user",
+                                       function() {
+                                         self.removeMentionedUser(event);
+  });
 };
 
 $.TweetCompose.prototype.submitHandler = function (event) {
@@ -35,8 +47,19 @@ $.TweetCompose.prototype.handleSuccess = function (tweet) {
 };
 
 $.TweetCompose.prototype.clearInput = function () {
-  this.$el.find("textarea").html("");
-  this.$el.find('select>option:eq(0)').prop('selected', true);
+  this.$el.find("textarea").val("");
+  this.$el.find(".chars-left").html("140");
+  this.$el.find('.mentioned-users').empty();
+};
+
+$.TweetCompose.prototype.addMentionedUser = function (event) {
+  var $scriptTag = this.$el.find("script");
+  var $mentionedUsers = this.$el.find("div.mentioned-users");
+  $mentionedUsers.append($scriptTag.html());
+};
+
+$.TweetCompose.prototype.removeMentionedUser = function (event) {
+  $(event.target).parent().remove();
 };
 
 $.fn.tweetCompose = function () {
