@@ -1,10 +1,12 @@
 <h1>Welcome <%= current_user.username %>!</h1>
 
-<b>Your Feed!</b>
-<ul id="feed">
-  <% @feed_tweets.each do |tweet| %>
-    <li><%= render "tweets/tweet", tweet: tweet %></li>
-  <% end %>
-</ul>
+<p><%= render "tweets/form" %></p>
 
-<%= render "tweets/form" %>
+<p>
+  <b>Your Feed!</b>
+  <ul id="feed">
+    <% @feed_tweets.each do |tweet| %>
+      <li><%= render "tweets/tweet", tweet: tweet %></li>
+    <% end %>
+  </ul>
+</p>
