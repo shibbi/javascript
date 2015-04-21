@@ -2,4 +2,12 @@
 
 Simple TicTacToe game implemented in JavaScript.
 
-Will be hosted on GitHub Pages once done.
+[Live link][link]
+
+## Description
+
+Simple and fun Tic Tac Toe implemented in JavaScript!
+
+It has a pretty-in-pastel theme.
+
+[link]: http://shibbi.github.io/TicTacToe/
