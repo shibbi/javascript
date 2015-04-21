@@ -3,7 +3,6 @@ if (typeof window.SnakeGame === "undefined") {
 }
 
 var View = window.SnakeGame.View = function($el) {
-  debugger
   this.board = new window.SnakeGame.Board();
   this.$el = $el;
   this.bindListener();
@@ -11,7 +10,7 @@ var View = window.SnakeGame.View = function($el) {
 };
 
 View.prototype.bindListener = function() {
-  $(".stack").keydown(function (event) {
+  $(".snake").keydown(function (event) {
     var code = event.keyCode;
     switch(code) {
       case 38:
