@@ -1,11 +1,13 @@
-README
-=====
+# TicTacToe JS
 
-**Currently not working correctly - board grid doesn't update itself with snake
-position**
+Simple TicTacToe game implemented in JavaScript.
 
-Simple Snake game implemented in JavaScript.
+[Live link][link]
 
-Open index.html to run.
+## Description
 
-https://github.com/appacademy/js-curriculum/blob/master/projects/w6d3-snake.md
+Simple and fun Tic Tac Toe implemented in JavaScript!
+
+It has a pretty-in-pastel theme.
+
+[link]: http://shibbi.github.io/TicTacToe/
