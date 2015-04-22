@@ -1,0 +1,57 @@
+body {
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.towers-of-hanoi {
+  margin: 0 auto;
+  width: 750px;
+  height: 200px;
+  padding-bottom: 50px;
+}
+
+.group:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+
+.stack {
+  float: left;
+  width: 200px;
+  height: 200px;
+  padding: 0px;
+  margin: 0 25px;
+  border-bottom: 5px solid #000;
+  position: relative;
+}
+
+.stack > * {
+  height: 50px;
+  background-color: gray;
+  border-radius: 50px;
+  margin: 10px auto;
+}
+
+.stack:hover {
+  border-bottom: 5px solid #00f;
+  cursor: pointer;
+}
+
+.selected, .selected:hover {
+  border-bottom: 5px solid #f00;
+}
+
+.disc-1 {
+  width: 66px;
+}
+
+.disc-2 {
+  width: 133px;
+}
+
+.disc-3 {
+  width: 200px;
+}
